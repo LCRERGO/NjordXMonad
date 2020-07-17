@@ -1,0 +1,3 @@
+# Haskell build files
+*.hi
+*.o
