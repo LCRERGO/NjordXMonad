@@ -27,8 +27,8 @@ import qualified DBus.Client as D
 
 main :: IO ()
 main = do
-    dbus <- D.connectSession
-    D.requestName dbus (D.busName_ "org.xmonad.Log")
+    barProc <- D.connectSession
+    D.requestName barProc (D.busName_ "org.xmonad.Log")
         [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
 
-    xmonad . ewmh . docks $ N.njordConfig dbus
+    xmonad . ewmh . docks $ N.njordConfig barProc

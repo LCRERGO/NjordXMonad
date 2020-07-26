@@ -38,14 +38,14 @@ import qualified XMonad.Njord.Layouts as N
 import qualified XMonad.Njord.Misc as N
 import qualified XMonad.Njord.Prompt as N
 
-njordConfig dbus = desktopConfig
+njordConfig barProc = desktopConfig
         { terminal = N.njordTerminal
         , handleEventHook = docksEventHook
         , modMask = N.njordModMask
         , layoutHook = N.njordLayoutHook
         , startupHook = N.njordStartupHook
         , workspaces = N.polybarWorkspaces
-        , logHook = dynamicLogWithPP (dbusLogHook dbus)
+        , logHook = dynamicLogWithPP (dbusLogHook barProc)
         } `additionalKeysP` N.njordKeys
 
 -- colors
