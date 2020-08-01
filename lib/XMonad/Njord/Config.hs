@@ -30,6 +30,7 @@ import XMonad.Util.SpawnOnce (spawnOnce)
 import qualified DBus as D
 import qualified DBus.Client as D
 import qualified Codec.Binary.UTF8.String as UTF8
+import System.IO (hPutStrLn)
 
 -- Njord Configuration
 import qualified XMonad.Njord.Applications as N
@@ -44,49 +45,12 @@ njordConfig barProc = desktopConfig
         , modMask = N.njordModMask
         , layoutHook = N.njordLayoutHook
         , startupHook = N.njordStartupHook
-        , workspaces = N.polybarWorkspaces
-        , logHook = dynamicLogWithPP (dbusLogHook barProc)
+        , workspaces = N.xmobarWorkspaces
+        , logHook = dynamicLogWithPP (xmobarLogHook barProc)
         } `additionalKeysP` N.njordKeys
 
--- colors
-gray    = "#bfbfbf"
-red     = "#ff4d4d"
-blue    = "#2e9afe"
-white   = "#eeeeee"
-green   = "#8cdd08"
-
-
---------------------------------------------------------------------------------
--- Dbus helpers
---------------------------------------------------------------------------------
-
-dbusOutput :: D.Client -> String -> IO ()
-dbusOutput dbus str = do
-    let signal = (D.signal objectPath interfaceName memberName) {
-            D.signalBody = [D.toVariant $ UTF8.decodeString str]
-        }
-    D.emit dbus signal
-  where
-    objectPath = D.objectPath_ "/org/xmonad/Log"
-    interfaceName = D.interfaceName_ "org.xmonad.Log"
-    memberName = D.memberName_ "Update"
-
-dbusLogHook :: D.Client -> PP
-dbusLogHook dbus = def 
-    { ppOutput          = dbusOutput dbus
-    , ppCurrent         = polybarColor green ""
-    , ppVisible         = polybarColor white ""
-    , ppUrgent          = polybarColor red ""
-    , ppHidden          = polybarColor blue ""
-    , ppHiddenNoWindows = polybarColor gray ""
-    , ppTitle           = const ""
-    , ppWsSep           = " "
-    , ppSep             = " | "
+xmobarLogHook proc = xmobarPP
+    { ppOutput = hPutStrLn proc
+    , ppTitle = const ""
+    , ppWsSep = " "
     }
-
-polybarColor :: String -> String -> String -> String
-polybarColor fg bg | null fg = wrap ("%{B" ++ bg ++ "} ") "%{B-}"
-  | null bg = wrap ("%{F" ++ fg ++ "} ") "%{F-}"
-  | not (null fg || null bg) = wrap ("%{F" ++ fg ++ "}" ++ 
-    "%{B" ++ bg ++ "} ") "%{F- B-}"
-  | otherwise = id

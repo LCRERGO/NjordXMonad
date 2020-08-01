@@ -9,7 +9,8 @@
 -- Github: https://github.com/LCRERGO 
 
 module XMonad.Njord.Misc
-    ( polybarWorkspaces
+    ( xmobarWorkspaces
+    , njordWorkspaces
     , njordTerminal
     , njordModMask
     , njordStartupHook )
@@ -37,10 +38,15 @@ njordWorkspaces =
     , "\xf6c3" -- Virtualization
     ]
 
-polybarWorkspaces = clickable njordWorkspaces
-    where clickable l = 
-            [ "%{A1:xdotool key super+" ++ show i ++ ":}" ++ ws ++ " %{A}" | 
-                (i, ws) <- zip [1..] l]
+dzenWorkspaces = clickable njordWorkspaces
+    where clickable l =
+            [ "^ca(1, xdotool key super+" ++ show i ++ ")" ++ ws ++ "^ca()" |
+                (i, ws) <- zip [1..] l ]
+
+xmobarWorkspaces = clickable njordWorkspaces
+    where clickable l =
+            [ "<action=xdotool key super+" ++ show i ++ ">" ++ ws ++ "</action>" |
+                (i, ws) <- zip [1..] l ]
 
 njordTerminal :: String
 njordTerminal = N.terminal N.njordApplications

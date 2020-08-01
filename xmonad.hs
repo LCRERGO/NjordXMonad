@@ -18,17 +18,15 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 
+-- XMonad Utils
+import XMonad.Util.Run (safeSpawn, spawnPipe)
+
 -- Njord Configuration
 import qualified XMonad.Njord.Config as N
+import qualified XMonad.Njord.Misc as N
 
--- Additional Haskell Imports
-import qualified DBus as D
-import qualified DBus.Client as D
 
 main :: IO ()
 main = do
-    barProc <- D.connectSession
-    D.requestName barProc (D.busName_ "org.xmonad.Log")
-        [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
-
+    barProc <- spawnPipe "xmobar ~/.config/xmobar/xmobarrc.hs"
     xmonad . ewmh . docks $ N.njordConfig barProc
