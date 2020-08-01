@@ -33,13 +33,10 @@ import XMonad.Layout.LayoutCombinators ((|||), JumpToLayout(..))
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Spacing (spacingRaw, Border(..))
 import XMonad.Layout.Renamed (renamed, Rename(Replace))
-import XMonad.Layout.WindowArranger
-import XMonad.Layout.WindowNavigation
 
 njordLayoutHook = layoutModifiers layoutsCombined
           where
-              layoutModifiers = windowArrange . smartBorders . avoidStruts .
-                  windowNavigation
+              layoutModifiers = smartBorders . avoidStruts
               layoutsCombined =
                   tiled                  |||
                   bDeck                  |||
