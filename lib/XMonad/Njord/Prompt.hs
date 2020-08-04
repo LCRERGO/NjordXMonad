@@ -35,10 +35,10 @@ import System.Exit (exitSuccess)
 njordPrompt :: XPConfig
 njordPrompt = def
     { font = "xft:Hack Nerd Font:pixelsize=12"
-    , bgColor = "#0c120f"
-    , fgColor = "#cfd2cb"
-    , bgHLight = "#e9eae7"
-    , fgHLight = "#0c120f"
+    , bgColor = "#282a36"
+    , fgColor = "#f8f8f2"
+    , bgHLight = "#bd93f9"
+    , fgHLight = "#f8f8f2"
     , borderColor = "#373b41"
     , promptBorderWidth = 1
     , position = Top
