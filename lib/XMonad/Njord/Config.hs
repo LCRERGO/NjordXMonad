@@ -14,6 +14,7 @@ module XMonad.Njord.Config
     
 -- XMonad Base
 import XMonad
+import qualified XMonad.StackSet as W
 
 -- XMonad Configs
 import XMonad.Config.Desktop (desktopConfig)
@@ -48,6 +49,13 @@ njordConfig barProc = desktopConfig
 polybarLogHook dbus = def 
     { ppCurrent = polybarColor N.purple3 ""
     , ppUrgent  = polybarColor N.red1 ""
+    , ppSep     = " | "
     , ppTitle   = const ""
+    , ppOrder   = \[ws,l,t,[exs]] -> [ws,[exs],l,t]
+    , ppExtras  = [windowCount]
     , ppOutput  = N.dbusOutput dbus
     }
+
+windowCount :: X (Maybe String)
+windowCount = gets $ Just . show . length . W.integrate' . 
+    W.stack . W.workspace . W.current . windowset
