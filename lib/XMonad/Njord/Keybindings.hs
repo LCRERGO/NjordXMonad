@@ -45,7 +45,7 @@ njordKeys :: [(String, X ())]
 njordKeys =
     -- Workspace Manipulation
     [ ("M-" ++ m ++ k, windows $ f i)
-        | (i, k) <- zip N.xmobarWorkspaces (show <$> [1..])
+        | (i, k) <- zip N.polybarWorkspaces (show <$> [1..])
         , (f, m) <- [(W.view, ""), (W.shift, "S-"), (copy, "C-")]]
     ++
     -- Prompt Selection

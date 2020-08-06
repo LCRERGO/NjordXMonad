@@ -1,0 +1,47 @@
+module XMonad.Njord.Colors
+    where
+
+-- Dracula Colors
+grayBlue0   = "#282a36"
+gray0       = "#44475a"
+white0      = "#f8f8f2"
+lightBlue0  = "#6272a4"
+cyan0       = "#8be9fd"
+green0      = "#50fa7b"
+orange0     = "#ffb86c"
+pink0       = "#ff79c6"
+purple0     = "#bd93f9"
+red0        = "#ff5555"
+yellow0     = "#f1fa8c"
+
+-- Gynvael's Colors
+grayPurple  = "#463b75"
+purple1     = "#9387c2"
+purple2     = "#8b8bcd"
+white1      = "#eeeeee"
+darkGray0   = "#2e2e37"
+green1      = "#00ff00"
+pink1       = "#c080d0"
+cyan1       = "#409090"
+pink2       = "#ff8bff"
+orange1     = "#f0ad6d"
+green2      = "#5ed378"
+grayBlue1   = "#1b1b33"
+
+-- Nord Colors
+darkGray1   = "#2e3440"
+darkGray2   = "#3b4252"
+darkGray3   = "#434c5e"
+darkGray4   = "#4c566a"
+white2      = "#d8dee9"
+white3      = "#e5e9f0"
+white4      = "#eceff4"
+lightBlue1  = "#8fbcbb"
+cyan2       = "#88c0d0"
+lightBlue2  = "#81a1c1"
+lightBlue3  = "#5e81ac"
+red1        = "#bf616a"
+orange2     = "#d08770"
+yellow1     = "#ebcb8b"
+green3      = "#a3be8c"
+purple3     = "#b48ead"

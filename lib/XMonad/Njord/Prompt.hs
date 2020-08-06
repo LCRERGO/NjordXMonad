@@ -28,30 +28,31 @@ import XMonad.Prompt.Ssh (sshPrompt)
 
 -- Njord Configuration
 import qualified XMonad.Njord.Applications as N
+import qualified XMonad.Njord.Colors as N
 
 -- Additional Haskell imports
 import System.Exit (exitSuccess)
 
 njordPrompt :: XPConfig
 njordPrompt = def
-    { font = "xft:Hack Nerd Font:pixelsize=12"
-    , bgColor = "#282a36"
-    , fgColor = "#f8f8f2"
-    , bgHLight = "#bd93f9"
-    , fgHLight = "#f8f8f2"
-    , borderColor = "#373b41"
-    , promptBorderWidth = 1
-    , position = Top
-    , alwaysHighlight = True
-    , height = 22
-    , maxComplRows = Just 4
-    , historySize = 256
-    , historyFilter = id
-    , promptKeymap = emacsLikeXPKeymap
-    , defaultText = []
-    , autoComplete = Just 100000
+    { font                = "xft:Hack Nerd Font:pixelsize=12"
+    , bgColor             = N.grayBlue0
+    , fgColor             = N.white0
+    , bgHLight            = N.purple0
+    , fgHLight            = N.white0
+    , borderColor         = "#373b41"
+    , promptBorderWidth   = 1
+    , position            = Top
+    , alwaysHighlight     = True
+    , height              = 22
+    , maxComplRows        = Just 4
+    , historySize         = 256
+    , historyFilter       = id
+    , promptKeymap        = emacsLikeXPKeymap
+    , defaultText         = []
+    , autoComplete        = Just 100000
     , showCompletionOnTab = True
-    , searchPredicate = fuzzyMatch
+    , searchPredicate     = fuzzyMatch
     }
 
 --------------------------------------------------------------------------------

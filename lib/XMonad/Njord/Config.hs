@@ -25,15 +25,11 @@ import XMonad.Hooks.DynamicLog
 -- XMonad Utilities
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.SpawnOnce (spawnOnce)
-
--- Additional Haskell Imports
-import qualified DBus as D
-import qualified DBus.Client as D
-import qualified Codec.Binary.UTF8.String as UTF8
-import System.IO (hPutStrLn)
+import XMonad.Util.PolybarFormating
 
 -- Njord Configuration
 import qualified XMonad.Njord.Applications as N
+import qualified XMonad.Njord.Colors as N
 import qualified XMonad.Njord.Keybindings as N
 import qualified XMonad.Njord.Layouts as N
 import qualified XMonad.Njord.Misc as N
@@ -45,12 +41,13 @@ njordConfig barProc = desktopConfig
         , modMask = N.njordModMask
         , layoutHook = N.njordLayoutHook
         , startupHook = N.njordStartupHook
-        , workspaces = N.xmobarWorkspaces
-        , logHook = dynamicLogWithPP (xmobarLogHook barProc)
+        , workspaces = N.polybarWorkspaces
+        , logHook = dynamicLogWithPP (polybarLogHook barProc)
         } `additionalKeysP` N.njordKeys
 
-xmobarLogHook proc = xmobarPP
-    { ppOutput = hPutStrLn proc
-    , ppTitle = const ""
-    , ppWsSep = " "
+polybarLogHook dbus = def 
+    { ppCurrent = polybarColor N.purple3 ""
+    , ppUrgent  = polybarColor N.red1 ""
+    , ppTitle   = const ""
+    , ppOutput  = N.dbusOutput dbus
     }

@@ -24,11 +24,13 @@ data Applications = Applications
     }
 
 njordApplications = Applications
-    { terminal = "alacritty"
-    , browser = "firefox"
-    , fileBrowser = "ranger"
-    , musicPlayer = "ncmpcpp"
-    , calendar = "calcurse"
-    , calculator = "ghci"
-    , ircClient = "irssi --config=$XDG_CONFIG_HOME/irssi/config --home=$XDG_DATA_HOME/irssi"
+    { terminal      = "alacritty"
+    , browser       = "brave-browser"
+    , fileBrowser   = "ranger"
+    , musicPlayer   = "ncmpcpp"
+    , calendar      = "calcurse"
+    , calculator    = "ghci"
+    , ircClient     = "irssi " ++
+        "--config=$XDG_CONFIG_HOME/irssi/config " ++ 
+        "--home=$XDG_DATA_HOME/irssi"
     }

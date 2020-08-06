@@ -9,11 +9,13 @@
 -- Github: https://github.com/LCRERGO 
 
 module XMonad.Njord.Misc
-    ( xmobarWorkspaces
+    ( dbusOutput
     , njordWorkspaces
     , njordTerminal
     , njordModMask
-    , njordStartupHook )
+    , njordStartupHook 
+    , polybarWorkspaces
+    )
     where
 
 -- XMonad Base
@@ -24,6 +26,11 @@ import XMonad.Util.SpawnOnce (spawnOnce)
 
 -- Njord Configuration
 import qualified XMonad.Njord.Applications as N
+
+-- Haskell additional utilities
+import qualified DBus as D
+import qualified DBus.Client as D
+import qualified Codec.Binary.UTF8.String as UTF8
 
 njordWorkspaces :: [WorkspaceId]
 njordWorkspaces = 
@@ -38,15 +45,13 @@ njordWorkspaces =
     , "\xf6c3" -- Virtualization
     ]
 
-dzenWorkspaces = clickable njordWorkspaces
-    where clickable l =
-            [ "^ca(1, xdotool key super+" ++ show i ++ ")" ++ ws ++ "^ca()" |
-                (i, ws) <- zip [1..] l ]
+polybarWorkspaces = clickable njordWorkspaces
+    where clickable l = 
+            [ "%{A1:xdotool key super+" ++ show i ++ ":}" ++ ws ++ " %{A}" | 
+                (i, ws) <- zip [1..] l]
 
-xmobarWorkspaces = clickable njordWorkspaces
-    where clickable l =
-            [ "<action=xdotool key super+" ++ show i ++ ">" ++ ws ++ "</action>" |
-                (i, ws) <- zip [1..] l ]
+polybarFont :: String -> String -> String
+polybarFont fontNum str = "%{T" ++ fontNum ++ "}" ++ str ++ "%{T-}"
 
 njordTerminal :: String
 njordTerminal = N.terminal N.njordApplications
@@ -61,3 +66,17 @@ njordStartupHook = do
     spawnOnce "set_wall"
     spawn "$XDG_CONFIG_HOME/polybar/launch.sh"
     spawnOnce "xsetroot -cursor_name left_ptr"
+
+--------------------------------------------------------------------------------
+-- Dbus signaler function
+--------------------------------------------------------------------------------
+dbusOutput :: D.Client -> String -> IO ()
+dbusOutput dbus str = do
+    let signal = (D.signal xmonadObjPath xmonadIntName memberName)
+                { D.signalBody = [D.toVariant $ UTF8.decodeString str]
+                }
+    D.emit dbus signal
+        where 
+            xmonadObjPath = D.objectPath_ "/org/xmonad/Log"
+            xmonadIntName = D.interfaceName_ "org.xmonad.Log"
+            memberName    = D.memberName_ "Update"

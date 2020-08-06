@@ -20,6 +20,7 @@ import XMonad.Hooks.EwmhDesktops
 
 -- XMonad Utils
 import XMonad.Util.Run (safeSpawn, spawnPipe)
+import XMonad.Util.DBusHook
 
 -- Njord Configuration
 import qualified XMonad.Njord.Config as N
@@ -28,5 +29,5 @@ import qualified XMonad.Njord.Misc as N
 
 main :: IO ()
 main = do
-    barProc <- spawnPipe "xmobar ~/.config/xmobar/xmobarrc.hs"
-    xmonad . ewmh . docks $ N.njordConfig barProc
+    dbus <- getDbusHook
+    xmonad . ewmh . docks $ N.njordConfig dbus
