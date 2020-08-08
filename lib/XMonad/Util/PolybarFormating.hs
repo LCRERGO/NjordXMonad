@@ -21,7 +21,7 @@ polybarFont :: String -> String -> String
 polybarFont fn = wrap ("%{T" ++ fn ++ "}") "%{T-}"
 
 polybarOverline :: String -> String -> String
-polybarOverline oc = wrap ("%{o" ++ oc ++ "}%{+0}") "%{o-}"
+polybarOverline oc = wrap ("%{o" ++ oc ++ "}%{+o}") "%{o-}"
 
 polybarUnderline :: String -> String -> String
 polybarUnderline uc = wrap ("%{u" ++ uc ++ "}%{+u}") "%{u-}"

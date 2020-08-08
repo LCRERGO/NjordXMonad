@@ -50,9 +50,6 @@ polybarWorkspaces = clickable njordWorkspaces
             [ "%{A1:xdotool key super+" ++ show i ++ ":}" ++ ws ++ " %{A}" | 
                 (i, ws) <- zip [1..] l]
 
-polybarFont :: String -> String -> String
-polybarFont fontNum str = "%{T" ++ fontNum ++ "}" ++ str ++ "%{T-}"
-
 njordTerminal :: String
 njordTerminal = N.terminal N.njordApplications
 

@@ -47,8 +47,8 @@ njordConfig barProc = desktopConfig
         } `additionalKeysP` N.njordKeys
 
 polybarLogHook dbus = def 
-    { ppCurrent = polybarColor N.purple3 ""
-    , ppUrgent  = polybarColor N.red1 ""
+    { ppCurrent = polybarUnderline N.purple3
+    , ppUrgent  = polybarUnderline N.red1
     , ppSep     = " | "
     , ppTitle   = const ""
     , ppOrder   = \[ws,l,t,[exs]] -> [ws,[exs],l,t]
