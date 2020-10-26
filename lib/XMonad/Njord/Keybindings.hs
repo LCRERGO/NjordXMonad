@@ -117,6 +117,9 @@ njordKeys =
     , ("<XF86AudioRaiseVolume>"     , spawn $ volCtl "inc")
     , ("<XF86AudioLowerVolume>"     , spawn $ volCtl "dec")
     , ("<XF86AudioMute>"            , spawn $ volCtl "mute")
+    , ("S-<XF86AudioRaiseVolume>"     , spawn $ volCtl "mic inc")
+    , ("S-<XF86AudioLowerVolume>"     , spawn $ volCtl "mic dec")
+    , ("S-<XF86AudioMute>"            , spawn $ volCtl "mic mute")
     -- Music xPlayer Control
     , ("<XF86AudioPlay>"            , spawn $ playerCtl "toggle")
     , ("S-<XF86AudioPlay>"          , spawn $ playerCtl "stop")
@@ -148,9 +151,12 @@ ascend = flip W.float (W.RationalRect (1%4) (1%4) (1%2) (1%2))
 -- environment.
 --------------------------------------------------------------------------------
 volCtl :: String -> String
-volCtl arg | arg == "inc"  = "amixer -q set Master 5%+"
-           | arg == "dec"  = "amixer -q set Master 5%-"
-           | arg == "mute" = "amixer -q set Master toggle"
+volCtl arg | arg == "inc"      = "amixer -q set Master 5%+"
+           | arg == "dec"      = "amixer -q set Master 5%-"
+           | arg == "mute"     = "amixer -q set Master toggle"
+           | arg == "mic inc"  = "amixer -q set Capture 5%+"
+           | arg == "mic dec"  = "amixer -q set Capture 5%-"
+           | arg == "mic mute" = "amixer -q set Capture toggle"
 playerCtl :: String -> String
 playerCtl arg | arg == "toggle" = "mpc toggle"
               | arg == "stop"   = "mpc stop"
