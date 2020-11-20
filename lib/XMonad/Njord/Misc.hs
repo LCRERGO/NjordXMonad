@@ -61,6 +61,7 @@ njordStartupHook = do
     spawnOnce "dunst &"
     spawnOnce "compton -b"
     spawnOnce "set_wall"
+    spawnOnce "emacs --daemon"
     spawn "$XDG_CONFIG_HOME/polybar/launch.sh"
     spawnOnce "xsetroot -cursor_name left_ptr"
 
