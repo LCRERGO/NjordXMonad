@@ -24,7 +24,7 @@ data Applications = Applications
     }
 
 njordApplications = Applications
-    { terminal      = "alacritty"
+    { terminal      = "st"
     , browser       = "brave-browser"
     , fileBrowser   = "ranger"
     , musicPlayer   = "ncmpcpp"
