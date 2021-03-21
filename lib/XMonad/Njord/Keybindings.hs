@@ -117,9 +117,9 @@ njordKeys =
     , ("<XF86AudioRaiseVolume>"     , spawn $ volCtl "inc")
     , ("<XF86AudioLowerVolume>"     , spawn $ volCtl "dec")
     , ("<XF86AudioMute>"            , spawn $ volCtl "mute")
-    , ("S-<XF86AudioRaiseVolume>"     , spawn $ volCtl "mic inc")
-    , ("S-<XF86AudioLowerVolume>"     , spawn $ volCtl "mic dec")
-    , ("S-<XF86AudioMute>"            , spawn $ volCtl "mic mute")
+    , ("S-<XF86AudioRaiseVolume>"   , spawn $ volCtl "mic inc")
+    , ("S-<XF86AudioLowerVolume>"   , spawn $ volCtl "mic dec")
+    , ("S-<XF86AudioMute>"          , spawn $ volCtl "mic mute")
     -- Music xPlayer Control
     , ("<XF86AudioPlay>"            , spawn $ playerCtl "toggle")
     , ("S-<XF86AudioPlay>"          , spawn $ playerCtl "stop")
