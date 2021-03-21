@@ -111,7 +111,8 @@ njordKeys =
     , ("M-S-q"  , io exitSuccess)
     , ("M-q"    , spawn restartXMonad)
 
-    , ("<Print>", spawn printCmd)
+    , ("<Print>"    , spawn $ printCmd "screen")
+    , ("S-<Print>"  , spawn $ printCmd "window")
     -- Multimedia keys
     -- Audio Control
     , ("<XF86AudioRaiseVolume>"     , spawn $ volCtl "inc")
@@ -133,8 +134,9 @@ njordKeys =
 -- Helper Functions
 --------------------------------------------------------------------------------
 
-printCmd :: String
-printCmd = "import -window root /tmp/pic-$(date '+%y%m%d-%H%M-%S').jpg"
+printCmd :: String -> String
+printCmd arg | arg == "screen" = "import -window root /tmp/pic-$(date '+%y%m%d-%H%M-%S').jpg"
+             | arg == "window" = "import /tmp/pic-$(date '+%y%m%d-%H%M-%S').jpg"
 
 restartXMonad :: String
 restartXMonad = "if type xmonad;" ++
