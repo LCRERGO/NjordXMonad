@@ -69,7 +69,7 @@ powerPrompt conf = inputPromptWithCompl conf "Power" powerCompl ?+ powerManageme
   where
     powerCompl = mkComplFunFromList
                  [ "poweroff"
-                 , "rebbot"
+                 , "reboot"
                  , "suspend"
                  , "quit"
                  ]
